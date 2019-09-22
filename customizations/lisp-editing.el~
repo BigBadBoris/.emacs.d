@@ -1,0 +1,5 @@
+;; Configuration for editing lisps, such a emacs list, scheme, CL, Clojure, etc
+
+;; Paredit-mode
+
+(
