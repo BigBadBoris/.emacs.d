@@ -74,7 +74,8 @@
     paredit
     ;; pretty parens
     rainbow-delimiters
-    
+    ;; markdown
+    markdown-mode
     ;; Enhances M-x to allow easier execution of commands.
     smex))
 
