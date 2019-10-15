@@ -74,6 +74,8 @@
     paredit
     ;; pretty parens
     rainbow-delimiters
+    ;; Guile Intergration (REPL, etc)
+    geiser
     ;; highlight defined functions/macros in emacs lisp
     highlight-defined
     ;; markdown
