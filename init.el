@@ -74,6 +74,8 @@
     paredit
     ;; pretty parens
     rainbow-delimiters
+    ;; highlight defined functions/macros in emacs lisp
+    highlight-defined
     ;; markdown
     markdown-mode
     ;; Enhances M-x to allow easier execution of commands.

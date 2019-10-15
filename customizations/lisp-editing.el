@@ -12,4 +12,6 @@
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook #'enable-paredit-mode)
 
+;; highlight-defined hook for emacs lisp
+(add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
 
