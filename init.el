@@ -80,6 +80,8 @@
     highlight-defined
     ;; markdown
     markdown-mode
+    ;; web stuff
+    web-mode
     ;; Enhances M-x to allow easier execution of commands.
     smex))
 
