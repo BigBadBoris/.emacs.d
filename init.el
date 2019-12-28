@@ -39,7 +39,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages (quote (ido-completing-read+))))
 
 ;; change all yes/no questions to y/n type
@@ -62,7 +61,7 @@
 
 ;; Add your packages here
 (defvar my-packages
-  `(;; ido allows you to navigate choices easy by presenting lists, auto-complete, etc
+  `(;; id oallows you to navigate choices easy by presenting lists, auto-complete, etc
     ido-completing-read+
     ;; Org mode is the shit when you're tryna take notes, make TODO's, etc
     org
@@ -80,8 +79,16 @@
     highlight-defined
     ;; markdown
     markdown-mode
-    ;; web stuff
+    ;; Common Lisp REPL
+    slime
+    ;; web editing (html, css, etc)
     web-mode
+    ;; Javascript
+    js2-mode
+    ;; Documentation lookup
+    helm-dash
+    ;; The actual documentation
+    dash-docs
     ;; Enhances M-x to allow easier execution of commands.
     smex))
 
@@ -158,3 +165,9 @@
 
 ;; General Lisp Editing
 (load "lisp-editing.el")
+
+;; Web editing
+(load "webdev.el")
+
+;; Documentation lookup
+(load "documentation.el")
