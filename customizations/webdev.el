@@ -22,3 +22,4 @@
 (define-key web-mode-map (kbd "M-RET") 'web-mode-element-close)
 
 (require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))

@@ -69,6 +69,8 @@
     org-bullets
     ;; speed-typing game
     speed-type
+    ;; Git intergration
+    magit
     ;; Makes editing sexps easy as pie
     paredit
     ;; pretty parens
@@ -85,10 +87,10 @@
     web-mode
     ;; Javascript
     js2-mode
-    ;; Documentation lookup
-    helm-dash
     ;; The actual documentation
     dash-docs
+    ;;
+    helm-dash
     ;; Enhances M-x to allow easier execution of commands.
     smex))
 
