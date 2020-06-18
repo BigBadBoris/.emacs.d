@@ -39,7 +39,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (ido-completing-read+))))
+ '(package-selected-packages '(ido-completing-read+)))
 
 ;; change all yes/no questions to y/n type
 (fset `yes-or-no-p `y-or-n-p)
@@ -77,6 +77,12 @@
     rainbow-delimiters
     ;; Guile Intergration (REPL, etc)
     geiser
+    ;; Python IDE Stuff
+    elpy
+    ;; auto completion
+    company
+    ;; tree navigation
+    neotree
     ;; highlight defined functions/macros in emacs lisp
     highlight-defined
     ;; markdown
@@ -89,8 +95,14 @@
     js2-mode
     ;; The actual documentation
     dash-docs
-    ;;
+    ;; Very Large Files
+    vlf
+    ;; requirement for dash-docs
     helm-dash
+    ;; graphviz .dot files support
+    graphviz-dot-mode
+    ;; language server protocol
+    lsp-mode
     ;; Enhances M-x to allow easier execution of commands.
     smex))
 
@@ -155,12 +167,19 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") `smex)
 
+;; Set C code style
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
 ;;
 ;; External File Stuff
 ;;
 
 ;; load up customizations folder to emac's PATH
 (add-to-list `load-path "~/.emacs.d/customizations")
+
+;; Python Stuff
+(load "python-editing.el")
 
 ;; Org-Mode
 (load "org-mode.el")
@@ -173,3 +192,9 @@
 
 ;; Documentation lookup
 (load "documentation.el")
+
+;; Navigation Stuff
+(load "navigation.el")
+
+;; Language Server Protocol
+(load "langservprotocol.el")
