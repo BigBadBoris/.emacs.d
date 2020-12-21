@@ -44,6 +44,11 @@
 ;; change all yes/no questions to y/n type
 (fset `yes-or-no-p `y-or-n-p)
 
+;; Move backup files to a backup directory
+(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-by-copying t)
+
+
 ;;
 ;; Package Initialization
 ;;
@@ -99,12 +104,20 @@
     vlf
     ;; requirement for dash-docs
     helm-dash
+    ;;
+    vscode-dark-plus-theme
     ;; graphviz .dot files support
     graphviz-dot-mode
-    ;; language server protocol
-    lsp-mode
-    ;; Enhances M-x to allow easier execution of commands.
-    smex))
+    ;; symbol navigation
+    ggtags
+    ;; device-tree mode
+    dts-mode
+    ;; java lsp
+    lsp-java
+    ;; parsing
+    parsec
+    ;; completion front-end
+    counsel))
 
 ;; Install all packages if they aren't around (for new systems)
 (dolist (p my-packages)
@@ -116,16 +129,12 @@
 ;; Themes
 ;;
 
-;; add themes folder emacs path
-(add-to-list `custom-theme-load-path "~/.emacs.d/themes")
-;; load dracula theme (it's cool bro)
-(load-theme `dracula t)
+(load-theme 'vscode-dark-plus t)
+
 
 ;;
 ;; UI
 ;;
-
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -149,27 +158,28 @@
 (global-set-key "\C-x\ \C-r" `recentf-open-files)
 
 ;; Ido mode stuff
-(ido-mode 1)
-;; this allows fuzzy-matching
-(setq ido-enable-flex-matching t)
-;; don't use filename at point
-(setq ido-use-filename-at-point nil)
-;; Shows buffer names of recently opened files, even if they're not currently open
-(setq ido-use-virtual-buffers t)
-;; Let Ido roam free! use ido everywhere it is useful
-(ido-ubiquitous-mode t)
-(ido-everywhere t)
-;; Show list of buffere
-(global-set-key (kbd "C-x C-b") `ibuffer)
+;; (ido-mode 1)
+;; ;; this allows fuzzy-matching
+;; (setq ido-enable-flex-matching t)
+;; ;; don't use filename at point
+;; (setq ido-use-filename-at-point nil)
+;; ;; Shows buffer names of recently opened files, even if they're not currently open
+;; (setq ido-use-virtual-buffers t)
+;; ;; Let Ido roam free! use ido everywhere it is useful
+;; (ido-ubiquitous-mode t)
+;; (ido-everywhere t)
+;; ;; Show list of buffere
+;; (global-set-key (kbd "C-x C-b") `ibuffer)
 
-;; Smex (enhances M-x by showing list of possible commands in
-;; minibuffer
-(smex-initialize)
-(global-set-key (kbd "M-x") `smex)
+;; Ivy
 
-;; Set C code style
-(setq c-default-style "linux"
-      c-basic-offset 4)
+(require 'ivy)
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+
 
 ;;
 ;; External File Stuff
@@ -196,5 +206,7 @@
 ;; Navigation Stuff
 (load "navigation.el")
 
-;; Language Server Protocol
-(load "langservprotocol.el")
+;; Editing C/C++
+(load "c-editing.el")
+
+;; (load "java.el")
