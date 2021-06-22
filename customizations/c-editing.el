@@ -79,6 +79,44 @@
 ;; 		(add-to-list 'flycheck-clang-args arg))
 ;; 	      (setq flycheck-checker-error-threshold 1000))))
 
+
+(defun flycheck-enable-kernel-editing (cross-compiler-path isystem-path kernel-path arch)
+  "Set flycheck to kernel-editing mode given a CROSS-COMPILER-PATH, KERNEL-PATH, and machine ARCH."
+  (let* ((arch-dir (concat kernel-path "/arch/" arch ))
+	 (headers (list (concat kernel-path "/include/linux/compiler_types.h")
+			(concat kernel-path "/include/linux/kconfig.h")))
+	 (include-dirs (reverse (list (concat arch-dir "/include")
+				      (concat arch-dir "/include/generated")
+				      (concat kernel-path "/include/")
+				      (concat arch-dir "/include/uapi")
+				      (concat arch-dir "/include/generated/uapi")
+				      (concat kernel-path "/include/uapi")
+				      (concat kernel-path "/include/uapi"))))
+	 (args (list "-std=gnu89" "-nostdinc"))
+	 (defines (list "MODULE" "__KERNEL__" "KBUILD_BASENAME='\"hello\"'"
+			"KBUILD_MODNAME='\"hello\"'")))
+    (setq flycheck-c/c++-gcc-executable cross-compiler-path)
+    (dolist (header headers)
+      (add-to-list 'flycheck-gcc-args (concat "-include" header)))
+    (dolist (include-dir include-dirs)
+      (add-to-list 'flycheck-gcc-args (concat "-I" include-dir)))
+    (dolist (define defines)
+      (add-to-list 'flycheck-gcc-args (concat "-D" define)))
+    (add-to-list 'flycheck-gcc-args (concat "-isystem" isystem-path))
+    (dolist (arg args)
+      (add-to-list 'flycheck-gcc-args arg))))
+
+
+(defun flycheck-x86-kernel-editing ()
+  (interactive)
+  (flycheck-enable-kernel-editing "/usr/bin/gcc"
+				  "/usr/lib/gcc/x86_64-linux-gnu/include"
+				  (concat "/usr/src/linux-headers-"
+					  (string-trim
+					   (shell-command-to-string "uname -r"))
+					  "/")
+				  "arm64"))
+
 (defun flycheck-set-arm-cross-compile ()
   "Set flycheck checker to arm cross compiler."
   (interactive)
@@ -124,6 +162,7 @@
       (add-to-list 'flycheck-gcc-args arg))
     (dolist (header includes)
       (add-to-list 'flycheck-gcc-includes header))))
+
 
 
 ;; only run flycheck on buffer save to prevent slowdowns
