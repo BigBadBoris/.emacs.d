@@ -39,7 +39,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(ido-completing-read+)))
+ '(package-selected-packages (quote (ido-completing-read+))))
 
 ;; change all yes/no questions to y/n type
 (fset `yes-or-no-p `y-or-n-p)
@@ -114,6 +114,8 @@
     dts-mode
     ;; java lsp
     lsp-java
+    ;; flycheck
+    flycheck
     ;; parsing
     parsec
     ;; completion front-end

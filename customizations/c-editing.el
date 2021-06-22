@@ -87,11 +87,11 @@
 			(concat kernel-path "/include/linux/kconfig.h")))
 	 (include-dirs (reverse (list (concat arch-dir "/include")
 				      (concat arch-dir "/include/generated")
-				      (concat kernel-path "/include/")
+				      (concat kernel-path "/include")
 				      (concat arch-dir "/include/uapi")
 				      (concat arch-dir "/include/generated/uapi")
 				      (concat kernel-path "/include/uapi")
-				      (concat kernel-path "/include/uapi"))))
+				      (concat kernel-path "/include/generated/uapi"))))
 	 (args (list "-std=gnu89" "-nostdinc"))
 	 (defines (list "MODULE" "__KERNEL__" "KBUILD_BASENAME='\"hello\"'"
 			"KBUILD_MODNAME='\"hello\"'")))
@@ -110,12 +110,12 @@
 (defun flycheck-x86-kernel-editing ()
   (interactive)
   (flycheck-enable-kernel-editing "/usr/bin/gcc"
-				  "/usr/lib/gcc/x86_64-linux-gnu/include"
+				  "/usr/lib/gcc/x86_64-linux-gnu/9/include"
 				  (concat "/usr/src/linux-headers-"
 					  (string-trim
 					   (shell-command-to-string "uname -r"))
 					  "/")
-				  "arm64"))
+				  "x86"))
 
 (defun flycheck-set-arm-cross-compile ()
   "Set flycheck checker to arm cross compiler."
